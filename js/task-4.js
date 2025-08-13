@@ -5,35 +5,40 @@
     { value: 4, text: '4 з 17' },
     { value: 13, text: 'залишилось 13 пталежів' }
   ]
-user1 = {
+*/
+const user1 = {
   datEnd: "2024-09-17T00:00:00",
   openDate: "2023-04-17T00:00:00",
   repaymentShedule: [
-    {
-      "repaymentDate": "2023-05-09T00:00:00",
-      "repaymentStatus": "Виконано"
-    },
-    {
-      "repaymentDate": "2023-06-09T00:00:00",
-      "repaymentStatus": "Виконано"
-    },
-    {
-      "repaymentDate": "2023-07-09T00:00:00",
-      "repaymentStatus": "He виконано"
-    },
-    {
-      "repaymentDate": "2023-08-09T00:00:00",
-      "repaymentStatus": "Виконано"
-    },
-    {
-      "repaymentDate": "2023-09-09T00:00:00",
-      "repaymentStatus": "He виконано"
-    },
-    {
-      "repaymentDate": "2023-10-09T00:00:00",
-      "repaymentStatus": "Виконано"
-    },
-    
-  ]
-}
-*/
+    { repaymentDate: "2023-05-09T00:00:00", repaymentStatus: "Виконано" },
+    { repaymentDate: "2023-06-09T00:00:00", repaymentStatus: "Виконано" },
+    { repaymentDate: "2023-07-09T00:00:00", repaymentStatus: "He виконано" },
+    { repaymentDate: "2023-08-09T00:00:00", repaymentStatus: "Виконано" },
+    { repaymentDate: "2023-09-09T00:00:00", repaymentStatus: "He виконано" },
+    { repaymentDate: "2023-10-09T00:00:00", repaymentStatus: "Виконано" },
+  ],
+};
+
+const openDate = new Date(user1.openDate);
+const endDate = new Date(user1.datEnd);
+
+const totalMonths =
+  (endDate.getFullYear() - openDate.getFullYear()) * 12 +
+  (endDate.getMonth() - openDate.getMonth()) +
+  1;
+
+const completedPayments = user1.repaymentShedule.filter(
+  (p) => p.repaymentStatus === "Виконано"
+).length;
+
+const remainingPayments = totalMonths - completedPayments;
+
+const result = [
+  { value: completedPayments, text: `${completedPayments} з ${totalMonths}` },
+  {
+    value: remainingPayments,
+    text: `залишилось ${remainingPayments} пталежів`,
+  },
+];
+
+console.log(result);
